@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Add New Blog</title>
+    <style>
+        body {
+            background: #f9fafb;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .form-container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        .form-label {
+            font-weight: 600;
+        }
+        textarea {
+            resize: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #4e73df, #224abe);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #224abe, #4e73df);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/nav') %>
+
+    <div class="container">
+        <div class="form-container">
+            <h2 class="mb-4 text-center">✍️ Add New Blog</h2>
+            <form action="/blog" method="post" enctype="multipart/form-data">
+                
+                <div class="mb-3">
+                    <label for="coverImage" class="form-label">Cover Image</label>
+                    <input type="file" class="form-control" name="coverImage" id="coverImage">
+                </div>
+
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter blog title">
+                </div>
+
+                <div class="mb-3">
+                    <label for="body" class="form-label">Body</label>
+                    <textarea name="body" class="form-control" id="body" placeholder="Write your blog here..." style="height: 120px"></textarea>
+                </div>
+
+                <div class="d-grid mt-4">
+                    <button class="btn btn-primary">🚀 Publish Blog</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <%- include('./partials/scripts') %>
+</body>
+</html>

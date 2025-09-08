@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Blogify</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Main navigation links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        
+        <!-- This link only shows if the user is logged in -->
+        <% if(locals.user) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/blog/add-new">Add Blog</a>
+          </li>
+        <% } %>
+      </ul>
+
+      <!-- Auth-related links, pushed to the right with ms-auto -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <% if(locals.user) { %>
+          <!-- If user is logged in, show dropdown with their info -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <!-- Use user.profileImageURL and user.email from the user object -->
+              <img src="<%= user.profileImageURL %>" width="30" height="30" class="rounded-circle me-2" alt="user profile image">
+              <span><%= user.fullName %></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <!-- Ensure the logout link points to the correct route -->
+              <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+            </ul>
+          </li>
+        <% } else { %>
+          <!-- If user is not logged in, show Signin and Signup links -->
+          <li class="nav-item">
+            <a class="nav-link" href="/user/signin">Signin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/user/signup">Create Account</a>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- This part for displaying errors is good practice. 
+     You can keep it in your main layout file (like home.ejs) 
+     right after the nav partial include. -->
+<% if(locals.error) { %>
+  <div class="container mt-4">
+    <div class="alert alert-danger" role="alert">
+      <%= locals.error %>
+    </div>
+  </div>
+<% } %>
+
